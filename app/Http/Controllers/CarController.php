@@ -8,7 +8,7 @@ use App\Repositories\CarRepository,
 
 class CarController extends Controller
 {
-    private $car;
+    protected $car;
 
     public function __construct(CarRepository $carRepository)
     {

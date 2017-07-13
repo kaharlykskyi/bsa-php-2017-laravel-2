@@ -20,4 +20,5 @@ Route::prefix('api')->group(function () {
         Route::get('/', 'CarController@getCars');
         Route::get('{id}', 'CarController@getOneCar');
     });
+    Route::resource('admin/cars', "Admin\\AdminCarController", ['except' => ['create','edit']]);
 });
