@@ -16,5 +16,8 @@ Route::get('/', function () {
 });
 
 Route::prefix('api')->group(function () {
-    Route::get('cars', 'CarController@getCars');
+    Route::prefix('cars')->group(function (){
+        Route::get('/', 'CarController@getCars');
+        Route::get('{id}', 'CarController@getOneCar');
+    });
 });

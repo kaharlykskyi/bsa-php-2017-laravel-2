@@ -21,7 +21,8 @@ class CarController extends Controller
      */
     public function getCars() : JsonResponse
     {
-        return response()->json($this->car->getAll()->map(function (Car $car) {
+        $car = $this->car->getAll();
+        return response()->json($car->map(function (Car $car) {
                 return [
                     'id' => $car->getId(),
                     'model' => $car->getModel(),
@@ -30,6 +31,23 @@ class CarController extends Controller
                     'price' => $car->getPrice(),
                 ];
             })
+        );
+    }
+
+    public function getOneCar($id) : JsonResponse
+    {
+        $car = $this->car->getById($id);
+        if ($car === null) return abort(404, "Car with id({$id}) not found!");
+        return response()->json(
+                [
+                    'id' => $car->getId(),
+                    'model' => $car->getModel(),
+                    'year' => $car->getYear(),
+                    'mileage' => $car->getMileage(),
+                    'registration_number' => $car->getRegistrationNumber(),
+                    'color' => $car->getColor(),
+                    'price' => $car->getPrice(),
+                ]
         );
     }
 }
